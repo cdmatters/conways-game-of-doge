@@ -88,30 +88,34 @@ function generateStartPattern(input){
 ---------- RUNTIME METHODS -----------
 ------------------------------------*/
 
+function dogeToInscrutableNumber(dogeImg) {
+  var src = dogeImg.getAttribute('src');
+  if (src == "doge/deaddoge.jpg") {
+    return 0;
+  } else if (src = "doge/livedoge.png") {
+    return 10;
+  }
+  return undefined;
+}
 
-
-function getWorld(dim){
-    //return an array representation of world on DOM
-    var imgLongList = document.body.getElementsByTagName('img');
-    var worldArray = [];
-    var worldRow = [];
-
-    for (i=0;i<imgLongList.length; i++){
-        if (imgLongList[i].getAttribute('src') == 'doge/deaddoge.jpg')
-            worldRow.push(0);
-        else if (imgLongList[i].getAttribute('src') == 'doge/livedoge.png')
-            worldRow.push(10);
-        else
-            worldRow.push(undefined);
-
-        if ((i+1)%dim[1]==0){
-            worldArray.push(worldRow);
-            var worldRow = [];
-        }
+function chop(aList, chopLength) {
+  var choppings = [];
+  var currentChop = [];
+  for (var i = 0; i < aList.length; i++) {
+    if (currentChop.length === chopLength) {
+      choppings.push(currentChop);
+      currentChop = [];
     }
-    console.log(imgLongList[0].getAttribute('src'));
-    console.log(worldArray)
-    return worldArray
+    currentChop.push(aList[i]);
+  }
+  choppings.push(currentChop);
+  return choppings;
+}
+
+function getWorld() {
+  var imgs = document.body.getElementsByTagName('img');
+  var numbers = Array.prototype.slice.call(imgs).map(dogeToInscrutableNumber);
+  return chop(numbers, dimensions[1]);
 }
 
 function updateWorld(inputArray, dim){
