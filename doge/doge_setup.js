@@ -47,7 +47,7 @@ function setDimensions(height, width, rows, cols){
     dimensions = [rows, cols]; // deal with it!
     var style = document.getElementsByTagName('style')[0];
     style.innerHTML = css(width, height);
-    removeTable = document.getElementById("main");
+    var removeTable = document.getElementById("main");
     document.body.removeChild(removeTable);
     generateDogeTable();
 }
