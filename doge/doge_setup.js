@@ -13,36 +13,20 @@ function css(width, height) {
   return style;
 }
 
-function setDimensions(howMuchDoge){
-    var width, height;
-    if (howMuchDoge == 0){
-        dimensions = [60,61];
-        width = 20;
-        height = 20;
-    }
-    else if (howMuchDoge == 1){
-        dimensions = [30,41];
-        width = 30;
-        height = 30;
-    }
-    else if (howMuchDoge == 2){
-        dimensions = [10,20];
-        width = 60;
-        height = 60;
-    }
+function setDimensions(height, width, rows, cols){
+    dimensions = [rows, cols]; // deal with it!
     var style = document.getElementsByTagName('style')[0];
-
     style.innerHTML = css(width, height);
     removeTable = document.getElementById("main");
     document.body.removeChild(removeTable);
-    replaceTable = generateDogeTable(dimensions);        
+    replaceTable = generateDogeTable();
     return true;
 }
 
 
-function generateDogeTable(dim){
+function generateDogeTable(){
     //initiate table & insert to html
-    var rowNo = dim[0], colNo = dim[1];
+    var rowNo = dimensions[0], colNo = dimensions[1];
     var newTable = document.createElement('table');
     newTable.setAttribute('id','main');
     
