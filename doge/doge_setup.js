@@ -1,28 +1,17 @@
 //running Game of Doge....
 
+var dimensions = [10,20];
+
+var startPatterns = {
+    glider: [[2,2],[3,3],[3,4],[4,3],[2,4]],
+    gliderGun: [[7,1],[7,2],[8,1],[8,2],[7,11],[8,11],[9,11],[6,12],[10,12],[11,13],[5,13],[5,14],[11,14],
+    [10,16],[6,16],[8,15],[7,17],[8,17],[9,17],[8,18],[7,21],[7,22],[6,21],[6,22],[5,21],[5,22],[4,23],[8,23],
+    [8,25],[4,25],[3,25],[9,25],[6,35],[6,36],[5,35],[5,36]]
+}
+
 /*--------------------------
 ------- BOOT METHODS --------
 ---------------------------*/
-
-function css(width, height) {
-  var style = 'table{width:1240px;text-align:center;}';
-  style += 'img {'
-  style += 'height:' + height + 'px;';
-  style += 'width:' + width + 'px;';
-  style += '}';
-  return style;
-}
-
-function setDimensions(height, width, rows, cols){
-    dimensions = [rows, cols]; // deal with it!
-    var style = document.getElementsByTagName('style')[0];
-    style.innerHTML = css(width, height);
-    removeTable = document.getElementById("main");
-    document.body.removeChild(removeTable);
-    replaceTable = generateDogeTable();
-    return true;
-}
-
 
 function generateDogeTable(){
     //initiate table & insert to html
@@ -44,6 +33,27 @@ function generateDogeTable(){
     document.body.appendChild(newTable);
     return true
 }
+
+function css(width, height) {
+  var style = 'table{width:1240px;text-align:center;}';
+  style += 'img {'
+  style += 'height:' + height + 'px;';
+  style += 'width:' + width + 'px;';
+  style += '}';
+  return style;
+}
+
+function setDimensions(height, width, rows, cols){
+    dimensions = [rows, cols]; // deal with it!
+    var style = document.getElementsByTagName('style')[0];
+    style.innerHTML = css(width, height);
+    removeTable = document.getElementById("main");
+    document.body.removeChild(removeTable);
+    replaceTable = generateDogeTable();
+    return true;
+}
+
+
 
 function generateStartPattern(input){
     var blankTable = document.getElementById('main');
@@ -187,11 +197,6 @@ function printWorld(inputArray, dim){
 ------------ MAIN() METHOD ------------
 -------------------------------------*/
 
-
-var dimensions = [10,20];
-generateDogeTable(dimensions);
-
-
 function start(){
     //var theTable = document.body.getElementsByTagName('table')[0]; //note these two lines can be moved out.
     var world = getWorld(dimensions);
@@ -208,12 +213,4 @@ function start(){
     //setInterval(start,30000);
 }
 
-
-var startPatterns = {
-    glider: [[2,2],[3,3],[3,4],[4,3],[2,4]],
-    gliderGun: [[7,1],[7,2],[8,1],[8,2],[7,11],[8,11],[9,11],[6,12],[10,12],[11,13],[5,13],[5,14],[11,14],
-    [10,16],[6,16],[8,15],[7,17],[8,17],[9,17],[8,18],[7,21],[7,22],[6,21],[6,22],[5,21],[5,22],[4,23],[8,23],
-    [8,25],[4,25],[3,25],[9,25],[6,35],[6,36],[5,35],[5,36]]
-}
-
-
+generateDogeTable(dimensions);
