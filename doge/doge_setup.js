@@ -92,9 +92,11 @@ function dogeToInscrutableNumber(dogeImg) {
   var src = dogeImg.getAttribute('src');
   if (src == "doge/deaddoge.jpg") {
     return 0;
-  } else if (src = "doge/livedoge.png") {
+  } else if (src == "doge/livedoge.png") {
     return 10;
-  }
+  } else if (src == "doge/waslivedoge.png") {
+    return 0;
+  } else
   return undefined;
 }
 
@@ -113,8 +115,12 @@ function chop(aList, chopLength) {
 }
 
 function getWorld() {
+  //console.log('hey');
   var imgs = document.body.getElementsByTagName('img');
+  console.log(imgs)
+  //console.log(imgs);
   var numbers = Array.prototype.slice.call(imgs).map(dogeToInscrutableNumber);
+  //console.log(numbers);
   return chop(numbers, dimensions[1]);
 }
 
@@ -122,7 +128,7 @@ function updateWorld(inputArray, dim){
     //create a the next world neighbour representation by doing a neighbour tally 
     function printNeighbours(i,j){
         //add a ring of neighbours to next world from one cell 
-        if (inputArray[i][j]%9 ==1){
+        if (Math.floor(inputArray[i][j]/10) ==1 ){
             for (l= -1;l<2;l++){
                 if ( isNotEdgeCase(i-1,j+l) )
                     worldArray[i-1][j+l] +=1;
@@ -131,7 +137,7 @@ function updateWorld(inputArray, dim){
                 if (l!=0 && isNotEdgeCase(i, j+l))
                     worldArray[i][j+l] +=1;
             }
-            worldArray[i][j]+=9
+            worldArray[i][j]+=10;
         }
     }
     function isNotEdgeCase(cell_i,cell_j){
@@ -139,7 +145,7 @@ function updateWorld(inputArray, dim){
         return worldArray[cell_i] != undefined && worldArray[cell_i][cell_j] != undefined;
     }
 
-    var worldArray = []
+    var worldArray = [];
     for (i=0; i<dim[0];i++){
         worldArray.push(Array.apply(null, new Array(dim[1])).map(Number.prototype.valueOf,0));
     }
@@ -154,11 +160,11 @@ function updateWorld(inputArray, dim){
 function flattenWorld(inputArray){
     //take a tally of neighbours, and flatten into a representation (alive/dead/justdied)
     function conwayRules(value){
-        if ( value%9 == 3 )
+        if ( value%10 == 3 )
             return 10;
-        else if ( value%9 == 2 && Math.floor(value/9) ==1 )
+        else if ( value%10 == 2 && Math.floor(value/10) ==1 )
             return 10;
-        else if (Math.floor(value/9)==1)
+        else if (Math.floor(value/10)==1)
             return 9;
         else
             return 0;
@@ -177,8 +183,8 @@ function printWorld(inputArray, dim){
     var imgLongList = document.body.getElementsByTagName('img');
     var newWorldLongList = inputArray.reduce(function (a,b) {
                                              return a.concat(b);});
-    console.log(imgLongList);
-    console.log(newWorldLongList);
+    //console.log(imgLongList);
+    //console.log(newWorldLongList);
     if (imgLongList.length != newWorldLongList.length){
         console.log("UH OH! Something's gone wrong..")
         return false}
@@ -187,10 +193,10 @@ function printWorld(inputArray, dim){
             imgLongList[i].setAttribute('src','doge/deaddoge.jpg');
         else if (newWorldLongList[i] == 10) 
             imgLongList[i].setAttribute('src','doge/livedoge.png');
-        else if (newWorldLongList[i] == 9) 
-            imgLongList[i].setAttribute('src','doge/waslivedoge.png');    
+        else if (newWorldLongList[i] == 9) {
+            imgLongList[i].setAttribute('src','doge/waslivedoge.png');
         }
-    return inputArray;
+        }
 }
 
 
@@ -200,11 +206,11 @@ function printWorld(inputArray, dim){
 
 function start(){
     //var theTable = document.body.getElementsByTagName('table')[0]; //note these two lines can be moved out.
-    var world = getWorld(dimensions);
+
+    var world = getWorld();
     var neighbourWorld = updateWorld(world, dimensions);
     var flattenedWorld = flattenWorld(neighbourWorld);
     printWorld(flattenedWorld);
-    world = flattenedWorld;
     if(world.every(function isZeroArray(each){
         return each.every(function isZero(x){
             return x==0;} );}))
