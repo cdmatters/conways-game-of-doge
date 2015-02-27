@@ -4,18 +4,18 @@
 ------- BOOT METHODS --------
 ---------------------------*/
 
-function setDimensions(input){
+function setDimensions(howMuchDoge){
     var css = ['table{width:1240px;text-align:center;}img {height:', 'px;width:', 'px;}'];
     
-    if (input == 0){
+    if (howMuchDoge == 0){
         dimensions = [60,61];
         pix = [20,20];
     }
-    else if (input == 1){
+    else if (howMuchDoge == 1){
         dimensions = [30,41];
         pix = [30,30];    
     }
-    else if (input == 2){
+    else if (howMuchDoge == 2){
         dimensions = [10,20];
         pix = [60,60];
     }
