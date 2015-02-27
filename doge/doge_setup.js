@@ -49,11 +49,8 @@ function setDimensions(height, width, rows, cols){
     style.innerHTML = css(width, height);
     removeTable = document.getElementById("main");
     document.body.removeChild(removeTable);
-    replaceTable = generateDogeTable();
-    return true;
+    generateDogeTable();
 }
-
-
 
 function generateStartPattern(input){
     var blankTable = document.getElementById('main');
