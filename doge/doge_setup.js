@@ -4,24 +4,35 @@
 ------- BOOT METHODS --------
 ---------------------------*/
 
+function css(width, height) {
+  var style = 'table{width:1240px;text-align:center;}';
+  style += 'img {'
+  style += 'height:' + height + 'px;';
+  style += 'width:' + width + 'px;';
+  style += '}';
+  return style;
+}
+
 function setDimensions(howMuchDoge){
-    var css = ['table{width:1240px;text-align:center;}img {height:', 'px;width:', 'px;}'];
-    
+    var width, height;
     if (howMuchDoge == 0){
         dimensions = [60,61];
-        pix = [20,20];
+        width = 20;
+        height = 20;
     }
     else if (howMuchDoge == 1){
         dimensions = [30,41];
-        pix = [30,30];    
+        width = 30;
+        height = 30;
     }
     else if (howMuchDoge == 2){
         dimensions = [10,20];
-        pix = [60,60];
+        width = 60;
+        height = 60;
     }
     var style = document.getElementsByTagName('style')[0];
 
-    style.innerHTML=css[0]+pix[0]+css[1]+pix[1]+css[2];
+    style.innerHTML = css(width, height);
     removeTable = document.getElementById("main");
     document.body.removeChild(removeTable);
     replaceTable = generateDogeTable(dimensions);        
