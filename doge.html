@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Conway's Game of Doge</title>
+    <style>
+      table{
+        width:1240px;
+        text-align:center;
+      }
+      img {
+        height: 60px;
+        width: 60px;
+      }
+    </style>
+  </head>
+  <body>
+    <button onclick='start();'>Conway's Game of Doge</button>
+    <button onclick='location.reload();'>Much Stop</button>
+    ||
+    <button onclick='setDimensions(2);'>Some Doge</button>
+    <button onclick='setDimensions(1);'>Much Doge</button>
+    <button onclick='setDimensions(0);'>Muchest Doge!</button>
+    ||
+    <button onclick='generateStartPattern(0);'>Glider</button>
+    <button onclick='generateStartPattern(1);'>Lines</button>
+    <button onclick='generateStartPattern(2);'>Glider Gun (much big)</button>
+    ||
+    <a href="http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">Such confuse?</a>
+    <p></p>
+  </body>
+  <script src = 'doge/doge_setup.js'></script>
+</html>
